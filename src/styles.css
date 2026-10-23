@@ -415,3 +415,41 @@ input[type=range]{width:100%;accent-color:var(--yellow);height:24px;cursor:point
 .hero-title{font-size:clamp(32px,5.4vw,88px)}
 .hero-canvas{right:0;top:48%;width:min(54vw,780px)}
 @media (max-width:980px){.hero-canvas{width:80vw;right:0;top:42%;opacity:.8}}
+
+/* ======================= HERO: responsive (tablet + phone) ======================= */
+@media (max-width:980px){
+  /* stack: copy first, 3D stack below it (no more overlap) */
+  .hero{flex-direction:column;align-items:stretch;justify-content:flex-start;padding:128px 0 56px;min-height:100svh}
+  .hero-inner{order:1;gap:20px}
+  .hero-canvas{order:2;position:relative;right:auto;top:auto;translate:none;opacity:1;width:min(100%,640px);aspect-ratio:1.12;margin:12px auto 0;flex:none;align-self:center}
+  .hero-title{font-size:clamp(28px,8.8vw,76px)}
+  .hero-sub{max-width:46ch;font-size:clamp(14px,2.2vw,17px)}
+  .hero-foot{gap:22px}
+  .hero-cta{justify-content:flex-start}
+  .ruler-x{top:104px}
+  .fcursor.a{left:68%;top:52%}.fcursor.b{left:10%;top:84%}
+  .scroll-cue,.bz-label{display:none}
+}
+@media (max-width:520px){
+  .hero{padding:118px 0 40px}
+  .hero-cta .btn{width:100%;justify-content:center}
+  .hero-canvas{aspect-ratio:1.05;margin-top:8px}
+  .hero-lens-ring span{font-size:9px;padding:2px 7px}
+  .fcursor span{font-size:10px}
+  .bz-label{display:none}
+}
+@media (max-width:360px){.hero-sub{font-size:13.5px}}
+/* short landscape screens: don't force the copy to fight the 100svh min-height */
+@media (max-height:560px) and (min-width:981px){.hero{padding:112px 0 64px}}
+/* very small phones: keep the whole nav bar (Menu / logo / Let's talk) inside the pill */
+@media (max-width:360px){
+  .nav-bar{gap:4px;padding:5px}
+  .nav-toggle{padding:10px 8px;gap:8px;font-size:14px}
+  .nav-logo .brand-logo{height:14px}
+  .nav-pill{padding:10px 10px;font-size:13px}
+}
+
+/* hero dev-view lens: no hover effect on touch devices */
+@media (hover:none){
+  .hero-lens,.hero-lens-ring{display:none}
+}

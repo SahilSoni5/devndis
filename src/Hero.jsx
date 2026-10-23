@@ -13,7 +13,8 @@ function makeProjector(W, H, t, pointer) {
   const ry = -.62 + pointer.x * .5 + Math.sin(t * .00035) * .1
   const rx = .5 + pointer.y * .3 + Math.cos(t * .0003) * .05
   const cy_ = Math.cos(ry), sy_ = Math.sin(ry), cx_ = Math.cos(rx), sx_ = Math.sin(rx)
-  const S = W / 9.6, cx = W * .48, cy = H / 2
+  const narrow = W < 640 // keep the stack + its side labels inside small canvases
+  const S = W / (narrow ? 9.9 : 9.6), cx = W * (narrow ? .47 : .48), cy = H / 2
   return (x, y, z) => {
     let x1 = x * cy_ + z * sy_, z1 = -x * sy_ + z * cy_
     const y1 = y * cx_ - z1 * sx_; z1 = y * sx_ + z1 * cx_
@@ -126,9 +127,9 @@ function drawStack(ctx, W, H, dpr, t, pointer) {
   const labels = [['01', 'CODE', layers[0], BLUE], ['02', 'SYSTEM', layers[1], WHITE], ['03', 'DESIGN', layers[2], RED]]
   ctx.font = '500 10px "Geist Mono", ui-monospace, monospace'; ctx.textBaseline = 'middle'
   labels.forEach(([n, name, L, col]) => {
-    const a = P(hx, hy * .55, L.z), bx = a[0] + 36
+    const sm = W < 640, a = P(hx, hy * .55, L.z), bx = a[0] + (sm ? 14 : 36)
     ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(bx, a[1]); ctx.strokeStyle = rgba(col, .7); ctx.lineWidth = 1; ctx.stroke()
-    ctx.fillStyle = rgba(col, .95); ctx.fillText(n, bx + 6, a[1] - 1); ctx.fillStyle = rgba(WHITE, .75); ctx.fillText(name, bx + 26, a[1] - 1)
+    ctx.fillStyle = rgba(col, .95); ctx.fillText(n, bx + 5, a[1] - 1); ctx.fillStyle = rgba(WHITE, .75); ctx.fillText(name, bx + (sm ? 22 : 26), a[1] - 1)
   })
 
   // DEVNDIS mark floating above the stack: two overlapping pills (red = Dis, blue = Dev)
@@ -228,7 +229,7 @@ function useHeroEngine(sectionRef, refs, reduced) {
         }
         lens.x += (lens.tx - lens.x) * .09; lens.y += (lens.ty - lens.y) * .09
         section.style.setProperty('--lx', lens.x.toFixed(1) + 'px'); section.style.setProperty('--ly', lens.y.toFixed(1) + 'px')
-        section.style.setProperty('--lr', (190 + 14 * Math.sin(t * 8e-4)).toFixed(1) + 'px')
+        section.style.setProperty('--lr', ((innerWidth < 640 ? 80 : innerWidth < 980 ? 130 : 190) * (1 + .07 * Math.sin(t * 8e-4))).toFixed(1) + 'px')
         drawAurora(t); drawKnot(t)
         grid.style.setProperty('--gx', (pointer.x * -14).toFixed(1) + 'px'); grid.style.setProperty('--gy', (pointer.y * -14).toFixed(1) + 'px')
       }

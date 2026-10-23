@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#080808"/><path d="M7 8h8a8 8 0 010 16H7z" fill="#FF3B45"/><path d="M25 24h-8a8 8 0 010-16h8z" fill="#4D8DFF" opacity=".85" style="mix-blend-mode:screen"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="512" height="512" viewBox="0 0 512 512">
+<title>DEVNDIS favicon</title>
+<rect x="0" y="0" width="512" height="512" fill="#0B0B0C" id="Background"/><g id="DEVNDIS_Monogram"><path d="M87.04 101.84 L369.46 101.84 L424.96 157.34 L424.96 354.66 L369.46 410.16 L87.04 410.16 L87.04 173.99 L152.4 222.7 L152.4 350.35 L345.41 350.35 L359.6 336.16 L359.6 161.65 L87.04 161.65 Z" fill="#F2272C"/></g>
+</svg>
